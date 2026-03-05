@@ -1,0 +1,51 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam monochrome false
+skinparam arrows {
+    Color #Black
+    Thickness 2
+}
+
+interface IFractal {
+    + draw(g: Graphics2D): void
+}
+
+abstract class AbstractFractal {
+    # color: Color
+    # center: Point2D
+    # depth: int
+    + AbstractFractal(center: Point2D, color: Color, depth: int)
+    + getColor(): Color
+    + setColor(color: Color): void
+    + getCenter(): Point2D
+    + setCenter(center: Point2D): void
+    + getDepth(): int
+    + setDepth(depth: int): void
+    {abstract} + draw(g: Graphics2D): void
+}
+
+class RandomKochSnowflake {
+    - sides: int
+    - radius: double
+    + RandomKochSnowflake(center: Point2D, radius: double, sides: int, depth: int, color: Color)
+    + draw(g: Graphics2D): void
+    - randomSgn(): int
+    - drawRandomKochCurve(g: Graphics2D, p: Point2D, q: Point2D, n: int): void
+}
+
+class Main {
+    - image: BufferedImage
+    + Main()
+    - generateFractal(): void
+    + paintComponent(g: Graphics): void
+    + main(args: String[]): void
+}
+
+
+AbstractFractal ..|> IFractal : implements
+
+RandomKochSnowflake --|> AbstractFractal : extends
+
+Main ..> RandomKochSnowflake : creates & uses
+
+@enduml

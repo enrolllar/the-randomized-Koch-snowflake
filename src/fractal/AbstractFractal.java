@@ -8,34 +8,35 @@ public abstract class AbstractFractal implements IFractal {
     protected Color color;
     protected Point2D center;
     protected int depth;
+    protected int minimalElementsCount;
 
     public AbstractFractal(Point2D center, Color color, int depth) {
         this.center = center;
         this.color = color;
         this.depth = depth;
+        this.minimalElementsCount = 0;
     }
 
-    public Color getColor() {
-        return color;
+    public Color getColor() { return color; }
+    public void setColor(Color color) { this.color = color; }
+
+    public Point2D getCenter() { return center; }
+    public void setCenter(Point2D center) { this.center = center; }
+
+    public int getDepth() { return depth; }
+    public void setDepth(int depth) { this.depth = depth; }
+
+    @Override
+    public int getMinimalElementsCount() {
+        return minimalElementsCount;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    @Override
+    public void resetCounter() {
+        this.minimalElementsCount = 0;
     }
 
-    public Point2D getCenter() {
-        return center;
-    }
-
-    public void setCenter(Point2D center) {
-        this.center = center;
-    }
-
-    public int getDepth() {
-        return depth;
-    }
-
-    public void setDepth(int depth) {
-        this.depth = depth;
+    protected void incrementCounter() {
+        this.minimalElementsCount++;
     }
 }

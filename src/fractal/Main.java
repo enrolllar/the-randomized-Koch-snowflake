@@ -8,12 +8,14 @@ import java.awt.image.BufferedImage;
 public class Main extends JPanel {
 
     private BufferedImage image;
+    private RandomKochSnowflake snowflake;
 
     public Main() {
         setBackground(Color.WHITE);
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(800, 650));
         generateFractal();
     }
+
     private void generateFractal() {
         int width = 800;
         int height = 600;
@@ -27,7 +29,7 @@ public class Main extends JPanel {
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, width, height);
 
-        RandomKochSnowflake snowflake = new RandomKochSnowflake(
+        snowflake = new RandomKochSnowflake(
                 new Point2D.Double(width / 2.0, height / 2.0),
                 150,
                 6,
@@ -43,6 +45,14 @@ public class Main extends JPanel {
         super.paintComponent(g);
         if (image != null) {
             g.drawImage(image, 0, 0, this);
+        }
+
+        if (snowflake != null) {
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Arial", Font.BOLD, 16));
+            g.drawString("Количество минимальных элементов: " +
+                    snowflake.getMinimalElementsCount(), 20, 630);
+            g.drawString("Глубина рекурсии: " + snowflake.getDepth(), 20, 650);
         }
     }
 

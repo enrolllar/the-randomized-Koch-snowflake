@@ -19,6 +19,8 @@ public class RandomKochSnowflake extends AbstractFractal {
 
     @Override
     public void draw(Graphics2D g) {
+        resetCounter();
+
         Color oldColor = g.getColor();
         g.setColor(color);
 
@@ -75,6 +77,8 @@ public class RandomKochSnowflake extends AbstractFractal {
 
         g.setColor(w == 1 ? Color.GREEN : Color.CYAN);
         g.fillPolygon(triangle);
+
+        incrementCounter();
 
         drawRandomKochCurve(g, p, r, n - 1);
         drawRandomKochCurve(g, r, s, n - 1);
